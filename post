@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="id"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827"><title>Kasir IVENT</title>
+<style>
+*{box-sizing:border-box}:root{--bg:#f1f5f9;--card:#fff;--ink:#172033;--muted:#64748b;--line:#e2e8f0;--p:#4f46e5;--p2:#7c3aed;--g:#16a34a;--r:#dc2626}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:linear-gradient(135deg,#eef2ff,#f8fafc 48%,#ecfdf5);color:var(--ink)}
+header{background:linear-gradient(135deg,#111827,#312e81);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:20;box-shadow:0 8px 25px #0f172a2b}.top{max-width:1180px;margin:auto;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:10px}.brand-icon{width:43px;height:43px;border-radius:13px;background:#ffffff20;display:grid;place-items:center;font-size:23px}.brand b{font-size:18px}.brand small{display:block;color:#c7d2fe;margin-top:2px}#clock{font-size:12px;color:#e0e7ff}
+.wrap{max-width:1180px;margin:auto;padding:18px}.grid{display:grid;grid-template-columns:1.5fr 1fr;gap:15px}.card{background:#ffffffef;border:1px solid #e2e8f0e6;border-radius:20px;padding:18px;box-shadow:0 12px 35px #0f172a17;margin-bottom:15px}.card h2{margin:0 0 13px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}button,input{font:inherit}button{border:0;border-radius:12px;padding:11px 14px;cursor:pointer;transition:.18s}button:hover{transform:translateY(-1px);box-shadow:0 7px 18px #0f172a18}.nav button{background:#fff;border:1px solid var(--line);color:var(--ink)}.dark{background:linear-gradient(135deg,var(--p),var(--p2))!important;color:#fff!important}.green{background:var(--g)!important;color:#fff!important}.red{background:var(--r)!important;color:#fff!important}
+.search{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:13px;margin-bottom:12px;background:#fff;outline:none}.search:focus,input:focus{border-color:#818cf8;box-shadow:0 0 0 3px #6366f11a}.products{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;max-height:68vh;overflow:auto;padding:2px}.product{text-align:left;border:1px solid var(--line);background:#fff;padding:15px;min-height:100px;border-radius:15px}.product b{display:block;margin-bottom:8px;line-height:1.35}.price{font-weight:800;font-size:17px;color:#4338ca}.muted{color:var(--muted);font-size:12px}.cart-item{border-bottom:1px dashed var(--line);padding:11px 0}.row{display:flex;justify-content:space-between;gap:8px;align-items:center}.qty{width:75px;padding:8px;border:1px solid var(--line);border-radius:9px}.total{font-size:28px;font-weight:900;color:#312e81}.hidden{display:none}table{width:100%;border-collapse:collapse}th,td{padding:11px;border-bottom:1px solid #eef2f7;text-align:left}th{font-size:12px;text-transform:uppercase;color:#64748b;background:#f8fafc}
+.master-form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.master-form label{font-weight:700;font-size:13px}.master-form input{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;margin-top:5px}.master-form .full{grid-column:1/-1}.photo-box{border:2px dashed #cbd5e1;border-radius:14px;padding:14px;text-align:center;background:#f8fafc}.preview{width:100px;height:100px;object-fit:cover;border-radius:14px;margin:8px auto;display:block;background:#e5e7eb}.master-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.master-card{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}.master-card img{width:100%;height:145px;object-fit:cover;border-radius:12px;background:#f1f5f9}.master-card h3{font-size:15px;margin:9px 0 5px}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{padding:17px;border-radius:17px;background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--line)}.stat small{color:var(--muted);font-weight:700}.stat h2{margin:7px 0 0}.hero{background:linear-gradient(135deg,#312e81,#4f46e5);color:#fff;border:0}.hero-title{display:flex;align-items:center;justify-content:space-between;gap:15px}.hero-title h2{margin:0}.hero-title p{margin:5px 0 0;color:#c7d2fe}
+@media(max-width:750px){.grid{grid-template-columns:1fr}.products{grid-template-columns:1fr 1fr}.nav button{flex:1;min-width:120px}.card{padding:14px;border-radius:17px}.master-form{grid-template-columns:1fr}.master-grid{grid-template-columns:repeat(2,1fr)}.stat-grid{grid-template-columns:1fr}}@media(max-width:430px){.products{grid-template-columns:1fr}.master-grid{grid-template-columns:1fr}#clock{display:none}}@media print{header,.nav,#pos,.hero{display:none!important}.card{box-shadow:none;border:0}body{background:#fff}}
+</style></head>
+<body>
+<header><div class="top"><div class="brand"><div class="brand-icon">🧾</div><div><b>KASIR IVEN</b><small>Point of Sale • Manajemen Penjualan</small></div></div><span id="clock"></span></div></header>
+<div class="wrap">
+<div class="hero card"><div class="hero-title"><div><h2>Selamat datang di Kasir IVENT 👋</h2><p>Kelola transaksi, stok, produk, dan laporan dengan cepat.</p></div><div style="font-size:42px">🛍️</div></div></div>
+<div class="nav">
+<button class="dark" onclick="show('pos')">🛒 Kasir</button>
+<button onclick="show('report')">📊 Laporan</button>
+<button class="green" onclick="show('stock')">📦 Input Stock</button>
+<button onclick="show('master')">🧩 Master Produk</button>
+<button onclick="show('itemHistory')">🧾 Riwayat Item</button>
+<button onclick="backup()">💾 Backup</button>
+<button class="red" onclick="resetData()">♻️ Reset Data</button>
+</div>
+
+<section id="pos"><div class="grid">
+<div class="card"><h2>Transaksi</h2><input id="search" class="search" placeholder="🔎 Cari produk / kode..." oninput="renderProducts()"><div id="products" class="products"></div></div>
+<div class="card"><h2>Keranjang</h2><div id="cart"></div><hr>
+<div class="row"><b>Subtotal</b><b id="subtotal">Rp 0</b></div>
+<div class="row" style="margin:10px 0"><span>Diskon</span><input id="discount" class="qty" type="number" min="0" value="0" oninput="renderCart()"></div>
+<div class="row"><b>TOTAL</b><span class="total" id="total">Rp 0</span></div>
+<input id="customer" class="search" style="margin-top:12px" placeholder="Nama customer (opsional)">
+<input id="paid" class="search" type="number" placeholder="Uang bayar" oninput="renderCart">
+<div id="change" style="text-align:center;font-weight:bold"></div>
+<button class="dark" style="width:100%;font-size:17px" onclick="checkout()">💾 SIMPAN & CETAK STRUK</button>
+</div></div></section>
+
+<section id="report" class="hidden"><div class="card"><h2>📊 Laporan Penjualan</h2>
+<div class="nav"><input id="start" type="date"><input id="end" type="date"><button class="dark" onclick="renderReport()">Tampilkan</button><button class="green" onclick="exportCSV()">Export CSV</button><button onclick="window.print()">🖨️ Cetak</button></div>
+<div class="stat-grid"><div class="stat"><small>TRANSAKSI</small><h2 id="rCount">0</h2></div><div class="stat"><small>PENJUALAN</small><h2 id="rTotal">Rp 0</h2></div><div class="stat"><small>ITEM</small><h2 id="rQty">0</h2></div></div>
+<div style="overflow:auto"><table><thead><tr><th>Invoice</th><th>Tanggal</th><th>Kasir</th><th>Nama Item Produk</th><th>Total</th></tr></thead><tbody id="history"></tbody></table></div></div></section>
+
+<section id="itemHistory" class="hidden">
+<div class="card"><h2>🧾 Riwayat Penjualan Item Produk</h2>
+<div class="nav">
+<input id="itemSearch" class="search" style="margin:0;max-width:420px" placeholder="🔎 Cari nama/kode produk..." oninput="renderItemHistory()">
+<input id="itemStart" type="date">
+<input id="itemEnd" type="date">
+<button class="dark" onclick="renderItemHistory()">Tampilkan</button>
+
+<button onclick="exportItemCSV()">📄 CSV</button>
+<button onclick="exportItemTXT()">📝 TXT</button></div>
+<div class="grid" style="grid-template-columns:repeat(3,1fr)">
+<div class="card"><small>ITEM TERJUAL</small><h2 id="ihQty">0</h2></div>
+<div class="card"><small>OMZET ITEM</small><h2 id="ihTotal">Rp 0</h2></div>
+<div class="card"><small>PRODUK AKTIF</small><h2 id="ihProducts">0</h2></div>
+</div>
+<div style="overflow:auto"><table><thead><tr>
+<th>Tanggal</th><th>Invoice</th><th>Kode</th><th>Produk</th><th>Qty</th><th>Harga</th><th>Total</th>
+</tr></thead><tbody id="itemHistoryBody"></tbody></table></div>
+</div></section>
+
+
+<section id="master" class="hidden">
+<div class="card">
+<h2>🧩 Master Produk</h2>
+<p class="muted">Tambah produk baru dengan gambar, nama/keterangan, kode, dan harga. Data produk tersimpan di browser HP.</p>
+
+<div class="master-form">
+<div>
+<label>Kode Produk</label>
+<input id="mCode" placeholder="Contoh: IVEN-016">
+</div>
+<div>
+<label>Harga</label>
+<input id="mPrice" type="number" min="0" placeholder="Contoh: 50000">
+</div>
+<div class="full">
+<label>Nama / Text Produk</label>
+<input id="mName" placeholder="Nama produk">
+</div>
+<div class="full">
+<label>Gambar Produk</label>
+<div class="photo-box">
+<img id="mPreview" class="preview" alt="Preview" style="display:none">
+<input id="mImage" type="file" accept="image/*" onchange="previewMasterImage(this)">
+</div>
+</div>
+</div>
+
+<div class="nav" style="margin-top:14px">
+<button class="dark" onclick="saveMasterProduct()">➕ Simpan Produk</button>
+<button onclick="clearMasterForm()">🧹 Bersihkan</button>
+</div>
+</div>
+
+<div class="card">
+<h2>📋 Daftar Master Produk</h2>
+<input id="masterSearch" class="search" placeholder="🔎 Cari nama / kode produk..." oninput="renderMasterProducts()">
+<div id="masterProducts" class="master-grid"></div>
+</div>
+</section>
+<section id="stock" class="hidden"><div class="card"><h2>📦 Produk & Stok</h2><p>Master produk dan harga berasal dari file <b>TRANSAKSI IVENT.xlsx</b>. Stok tersimpan di browser HP.</p>
+<div style="overflow:auto"><table><thead><tr><th>Kode</th><th>Produk</th><th>Harga</th><th>Stok</th></tr></thead><tbody id="stockTable"></tbody></table></div></div></section>
+</div>
+<script>
+const BASE_PRODUCTS=[{"id": 1, "code": "LB2000-HIJAU", "name": "LIDAH BUAYA HIJAU BESAR ISI 30 PCS", "price": 50000}, {"id": 2, "code": "LB2000-KUNING", "name": "LIDAH BUAYA KUNING BESAR ISI 30 PCS", "price": 50000}, {"id": 3, "code": "LB2000-PUTIH", "name": "LIDAH BUAYA PUTIH ISI 30 PCS", "price": 50000}, {"id": 4, "code": "LB2000-SIWAK", "name": "LIDAH BUAYA SIWAK BESAR ISI 30 PCS", "price": 50000}, {"id": 5, "code": "LB2000-UNGGU", "name": "LIDAH BUAYA UNGGU BESAR ISI 30 PCS", "price": 50000}, {"id": 6, "code": "LB2000-PINK", "name": "LIDAH BUAYA PINK BESAR ISI 30 PCS", "price": 50000}, {"id": 7, "code": "LB2000-BIRU", "name": "LIDAH BUAYA BIRU BESAR ISI 30 PCS", "price": 50000}, {"id": 8, "code": "LB5000-HIJAU", "name": "LIDAH BUAYA HIJAU JUMBO ISI 10 PCS", "price": 42500}, {"id": 9, "code": "LB5000-PUTIH", "name": "LIDAH BUAYA PUTIH JUMBO ISI 10 PCS", "price": 42500}, {"id": 10, "code": "LB5000-KUNING", "name": "LIDAH BUAYA KUNING JUMBO ISI 10 PCS", "price": 42500}, {"id": 11, "code": "IVEN-011", "name": "PALAPA 600ML ISI 12 PCS", "price": 60000}, {"id": 12, "code": "IVEN-012", "name": "PALAPA 320ML ISI 12 PCS", "price": 40000}, {"id": 13, "code": "IVEN-013", "name": "PALAPA 450ML ISI 12 PCS", "price": 53000}, {"id": 14, "code": "IVEN-014", "name": "PALAPA KARBOL SEREH  450ML ISI 12 PCS", "price": 72000},{"id":15, "code":"IVEN-015", "name": "MEMBER CUCI PIRING JERUK NIPIS DIRIGEN 5 LITER", "price": 69500}];
+let customProducts=JSON.parse(localStorage.getItem('iven_products')||'[]');
+let PRODUCTS=[...BASE_PRODUCTS,...customProducts];
+let stock=JSON.parse(localStorage.getItem('iven_stock')||'{}');
+let sales=JSON.parse(localStorage.getItem('iven_sales')||'[]'),cart=[];
+const rp=n=>'Rp '+Number(n||0).toLocaleString('id-ID');
+const getStock=p=>stock[p.code]===undefined?0:Number(stock[p.code]);
+const save=()=>{localStorage.setItem('iven_stock',JSON.stringify(stock));localStorage.setItem('iven_sales',JSON.stringify(sales));localStorage.setItem('iven_products',JSON.stringify(customProducts))};
+function show(x){['pos','report','stock','itemHistory','master'].forEach(id=>document.getElementById(id).classList.toggle('hidden',id!==x));if(x==='report')renderReport();if(x==='stock')renderStock();if(x==='itemHistory')renderItemHistory();if(x==='master')renderMasterProducts()}
+function renderProducts(){let q=document.getElementById('search').value.toLowerCase();let ps=PRODUCTS.filter(p=>(p.name+' '+p.code).toLowerCase().includes(q));document.getElementById('products').innerHTML=ps.map(p=>`<button class="product" onclick="add(${p.id})"><b>${esc(p.name)}</b><span class="price">${rp(p.price)}</span><span class="muted">${p.code} · Stok: ${getStock(p)}</span></button>`).join('')||'<p>Produk tidak ditemukan.</p>'}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function add(id){let p=PRODUCTS.find(x=>x.id===id),s=getStock(p);if(s<=0)return alert('Stok masih 0. Isi stok di menu Produk & Stok.');let x=cart.find(x=>x.id===id);if(x){if(x.qty<s)x.qty++;else return alert('Melebihi stok.')}else cart.push({id,qty:1});renderCart()}
+function renderCart(){let sub=0;document.getElementById('cart').innerHTML=cart.map((x,i)=>{let p=PRODUCTS.find(p=>p.id===x.id);sub+=p.price*x.qty;return `<div class="cart-item"><div class="row"><b>${esc(p.name)}</b><button class="red" onclick="removeItem(${i})">×</button></div><div class="row"><span>${rp(p.price)} ×</span><input class="qty" type="number" min="1" max="${getStock(p)}" value="${x.qty}" onchange="setQty(${i},this.value)"><b>${rp(p.price*x.qty)}</b></div></div>`}).join('')||'<p class="muted">Keranjang kosong.</p>';let dis=Math.max(0,+document.getElementById('discount').value||0),total=Math.max(0,sub-dis),paid=+document.getElementById('paid').value||0;document.getElementById('subtotal').textContent=rp(sub);document.getElementById('total').textContent=rp(total);document.getElementById('change').textContent=paid>=total&&total?'Kembalian: '+rp(paid-total):''}
+function setQty(i,v){let p=PRODUCTS.find(p=>p.id===cart[i].id);cart[i].qty=Math.max(1,Math.min(getStock(p),+v||1));renderCart()}function removeItem(i){cart.splice(i,1);renderCart()}
+function checkout(){if(!cart.length)return alert('Keranjang kosong.');let sub=cart.reduce((a,x)=>a+PRODUCTS.find(p=>p.id===x.id).price*x.qty,0),dis=Math.max(0,+document.getElementById('discount').value||0),total=sub-dis,paid=+document.getElementById('paid').value||0;if(paid<total)return alert('Uang bayar kurang.');for(let x of cart){let p=PRODUCTS.find(p=>p.id===x.id);if(x.qty>getStock(p))return alert('Stok '+p.name+' tidak cukup.')}let sale={invoice:'IVN-'+Date.now(),date:new Date().toLocaleString('id-ID'),cashier:'Kasir',customer:document.getElementById('customer').value,items:cart.map(x=>({...x})),subtotal:sub,discount:dis,total,paid,change:paid-total};cart.forEach(x=>{let p=PRODUCTS.find(p=>p.id===x.id);stock[p.code]=getStock(p)-x.qty});sales.unshift(sale);save();printReceipt(sale);cart=[];document.getElementById('paid').value='';document.getElementById('customer').value='';document.getElementById('discount').value=0;renderCart();renderProducts()}
+function printReceipt(s){let rows=s.items.map(x=>{let p=PRODUCTS.find(p=>p.id===x.id);return `<div>${esc(p.name)}</div><div class="r"><span>${x.qty} x ${rp(p.price)}</span><span>${rp(p.price*x.qty)}</span></div>`}).join('');let w=open('','_blank','width=380,height=700');w.document.write(`<style>body{font:13px monospace;width:300px;margin:auto}.r{display:flex;justify-content:space-between}hr{border:0;border-top:1px dashed #000}@media print{button{display:none}}</style><center><h2>KASIR IVEN</h2>STRUK PENJUALAN</center><hr>Invoice: ${s.invoice}<br>Tanggal: ${s.date}<br>Kasir: ${s.cashier}<br>${s.customer?'Customer: '+esc(s.customer)+'<br>':''}<hr>${rows}<hr><div class="r"><b>SUBTOTAL</b><b>${rp(s.subtotal)}</b></div><div class="r"><span>DISKON</span><span>${rp(s.discount)}</span></div><div class="r"><b>TOTAL</b><b>${rp(s.total)}</b></div><div class="r"><span>BAYAR</span><span>${rp(s.paid)}</span></div><div class="r"><span>KEMBALI</span><span>${rp(s.change)}</span></div><br><center>Terima kasih 🙏</center><br><button onclick="print()">🖨️ CETAK</button>`);w.document.close()}
+function renderStock(){document.getElementById('stockTable').innerHTML=PRODUCTS.map(p=>`<tr><td>${p.code}</td><td>${esc(p.name)}</td><td>${rp(p.price)}</td><td><input class="qty" type="number" min="0" value="${getStock(p)}" onchange="stock['${p.code}']=Math.max(0,+this.value||0);save();renderProducts()"></td></tr>`).join('')}
+function parseDate(s){let a=s.split(',')[0].split('/');return a.length===3?a[2]+'-'+a[1].padStart(2,'0')+'-'+a[0].padStart(2,'0'):''}
+function renderReport(){let a=document.getElementById('start').value,b=document.getElementById('end').value,list=sales.filter(s=>{let d=parseDate(s.date);return(!a||d>=a)&&(!b||d<=b)});document.getElementById('rCount').textContent=list.length;document.getElementById('rTotal').textContent=rp(list.reduce((x,s)=>x+s.total,0));document.getElementById('rQty').textContent=list.reduce((x,s)=>x+s.items.reduce((q,i)=>q+i.qty,0),0);document.getElementById('history').innerHTML=list.map(s=>{let names=s.items.map(i=>{let p=PRODUCTS.find(p=>p.id===i.id);return p?`${esc(p.name)} (${i.qty})`:`Item #${i.id} (${i.qty})`}).join(', ');return `<tr><td>${esc(s.invoice)}</td><td>${esc(s.date)}</td><td>${esc(s.cashier)}</td><td>${names}</td><td>${rp(s.total)}</td></tr>`}).join('')||'<tr><td colspan="5">Belum ada transaksi.</td></tr>'}
+
+function renderItemHistory(){
+  let q=(document.getElementById('itemSearch').value||'').toLowerCase();
+  let a=document.getElementById('itemStart').value,b=document.getElementById('itemEnd').value;
+  let rows=[];
+  sales.forEach(s=>{
+    let d=parseDate(s.date);
+    if((a&&d<a)||(b&&d>b)) return;
+    s.items.forEach(x=>{
+      let p=PRODUCTS.find(p=>p.id===x.id);
+      if(!p) return;
+      if(q && !(p.name+' '+p.code).toLowerCase().includes(q)) return;
+      rows.push({date:s.date,invoice:s.invoice,code:p.code,name:p.name,qty:x.qty,price:p.price,total:p.price*x.qty});
+    });
+  });
+  document.getElementById('ihQty').textContent=rows.reduce((n,r)=>n+r.qty,0);
+  document.getElementById('ihTotal').textContent=rp(rows.reduce((n,r)=>n+r.total,0));
+  document.getElementById('ihProducts').textContent=new Set(rows.map(r=>r.code)).size;
+  document.getElementById('itemHistoryBody').innerHTML=rows.map(r=>`<tr>
+    <td>${esc(r.date)}</td><td>${esc(r.invoice)}</td><td>${esc(r.code)}</td>
+    <td>${esc(r.name)}</td><td>${r.qty}</td><td>${rp(r.price)}</td><td>${rp(r.total)}</td>
+  </tr>`).join('')||'<tr><td colspan="7">Belum ada penjualan item.</td></tr>';
+}
+
+let masterImageData='';
+
+function previewMasterImage(input){
+  const file=input.files&&input.files[0];
+  if(!file){masterImageData='';return;}
+  const reader=new FileReader();
+  reader.onload=e=>{
+    masterImageData=e.target.result;
+    const img=document.getElementById('mPreview');
+    img.src=masterImageData;
+    img.style.display='block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearMasterForm(){
+  window.editingMasterId=null;
+  ['mCode','mName','mPrice'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('mImage').value='';
+  masterImageData='';
+  document.getElementById('mPreview').style.display='none';
+}
+
+function saveMasterProduct(){
+  const code=document.getElementById('mCode').value.trim();
+  const name=document.getElementById('mName').value.trim();
+  const price=Math.max(0,+document.getElementById('mPrice').value||0);
+  if(!code||!name||!price)return alert('Kode, nama/text, dan harga wajib diisi.');
+
+  const editingId=window.editingMasterId;
+  if(editingId){
+    const p=customProducts.find(x=>x.id===editingId);
+    if(!p)return alert('Produk tidak ditemukan.');
+    const duplicate=PRODUCTS.some(x=>x.id!==editingId && x.code.toLowerCase()===code.toLowerCase());
+    if(duplicate)return alert('Kode produk sudah digunakan.');
+    const oldCode=p.code;
+    p.code=code; p.name=name; p.price=price; p.image=masterImageData||'';
+    if(oldCode!==code && stock[oldCode]!==undefined){stock[code]=stock[oldCode];delete stock[oldCode];}
+    window.editingMasterId=null;
+    PRODUCTS=[...BASE_PRODUCTS,...customProducts];
+    save();
+    clearMasterForm();
+    renderMasterProducts(); renderProducts(); renderStock();
+    alert('Produk Master berhasil diperbarui dan disimpan.');
+    return;
+  }
+
+  if(PRODUCTS.some(p=>p.code.toLowerCase()===code.toLowerCase()))
+    return alert('Kode produk sudah digunakan.');
+
+  const id=Date.now();
+  const product={id,code,name,price,image:masterImageData||''};
+  customProducts.push(product);
+  PRODUCTS=[...BASE_PRODUCTS,...customProducts];
+  save();
+  clearMasterForm();
+  renderMasterProducts();
+  renderProducts();
+  renderStock();
+  alert('Produk berhasil ditambahkan ke Master Produk dan tersimpan di HP.');
+}
+
+function renderMasterProducts(){
+  const q=(document.getElementById('masterSearch')?.value||'').toLowerCase();
+  const list=PRODUCTS.filter(p=>(p.name+' '+p.code).toLowerCase().includes(q));
+  document.getElementById('masterProducts').innerHTML=list.map(p=>`
+    <div class="master-card">
+      ${p.image?`<img src="${p.image}" alt="">`:`<div style="height:130px;border-radius:10px;background:#f3f4f6;display:grid;place-items:center;font-size:42px">📦</div>`}
+      <h3>${esc(p.name)}</h3>
+      <div class="muted">${esc(p.code)}</div>
+      <div class="price">${rp(p.price)}</div>
+      <div class="muted">Stok: ${getStock(p)}</div>
+      <div class="nav" style="margin-top:10px">
+        ${customProducts.some(x=>x.id===p.id)?`<button class="dark" onclick="editMasterProduct(${p.id})">✏️ Edit</button><button class="red" onclick="deleteMasterProduct(${p.id})">🗑️ Hapus</button>`:`<span class="muted">Produk bawaan</span>`}
+      </div>
+    </div>`).join('')||'<p>Belum ada produk.</p>';
+}
+
+function editMasterProduct(id){
+  const p=customProducts.find(x=>x.id===id);
+  if(!p)return alert('Produk bawaan tidak dapat diedit dari Master Produk.');
+  document.getElementById('mCode').value=p.code;
+  document.getElementById('mName').value=p.name;
+  document.getElementById('mPrice').value=p.price;
+  masterImageData=p.image||'';
+  const img=document.getElementById('mPreview');
+  if(masterImageData){img.src=masterImageData;img.style.display='block';}else{img.style.display='none';}
+  window.editingMasterId=id;
+  document.querySelector('#master h2').scrollIntoView({behavior:'smooth'});
+}
+
+function deleteMasterProduct(id){
+  const p=customProducts.find(x=>x.id===id);
+  if(!p)return;
+  if(!confirm('Hapus produk '+p.name+' dari Master Produk?'))return;
+  customProducts=customProducts.filter(x=>x.id!==id);
+  delete stock[p.code];
+  PRODUCTS=[...BASE_PRODUCTS,...customProducts];
+  save();
+  renderMasterProducts();
+  renderProducts();
+  renderStock();
+  alert('Produk berhasil dihapus.');
+}
+
+function resetData(){
+  if(!confirm('Reset semua stok dan seluruh riwayat penjualan? Data yang dihapus tidak dapat dikembalikan.')) return;
+  localStorage.removeItem('iven_stock');
+  localStorage.removeItem('iven_sales');
+  localStorage.removeItem('iven_products');
+  stock={}; sales=[]; cart=[]; customProducts=[]; PRODUCTS=[...BASE_PRODUCTS];
+  document.getElementById('paid').value='';
+  document.getElementById('customer').value='';
+  document.getElementById('discount').value=0;
+  renderProducts(); renderCart(); renderStock(); renderReport(); renderItemHistory();
+  alert('Semua data kasir berhasil di-reset.');
+}
+
+function getItemHistoryRows(){let q=(document.getElementById('itemSearch').value||'').toLowerCase(),a=document.getElementById('itemStart').value,b=document.getElementById('itemEnd').value,rows=[];sales.forEach(s=>{let d=parseDate(s.date);if((a&&d<a)||(b&&d>b))return;s.items.forEach(x=>{let p=PRODUCTS.find(p=>p.id===x.id);if(!p)return;if(q&&!(p.name+' '+p.code).toLowerCase().includes(q))return;rows.push({date:s.date,invoice:s.invoice,code:p.code,name:p.name,qty:x.qty,price:p.price,total:p.price*x.qty})})});return rows}
+function downloadBlob(content,filename,type){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function exportItemCSV(){let rows=[['Tanggal','Invoice','Kode','Nama Produk','Qty','Harga','Total'],...getItemHistoryRows().map(r=>[r.date,r.invoice,r.code,r.name,r.qty,r.price,r.total])];downloadBlob(rows.map(r=>r.map(x=>`"${String(x??'').replaceAll('"','""')}"`).join(',')).join('\\n'),'riwayat_item_iven.csv','text/csv;charset=utf-8')}
+function exportItemTXT(){let rows=getItemHistoryRows(),txt=['RIWAYAT PENJUALAN ITEM PRODUK','Tanggal | Invoice | Kode | Nama Produk | Qty | Harga | Total',...rows.map(r=>`${r.date} | ${r.invoice} | ${r.code} | ${r.name} | ${r.qty} | ${rp(r.price)} | ${rp(r.total)}`)];downloadBlob(txt.join('\\n'),'riwayat_item_iven.txt','text/plain;charset=utf-8')}
+function exportItemExcel(){let rows=[['Tanggal','Invoice','Kode','Nama Produk','Qty','Harga','Total'],...getItemHistoryRows().map(r=>[r.date,r.invoice,r.code,r.name,r.qty,r.price,r.total])];let html='<html><head><meta charset="utf-8"></head><body><table border="1">'+rows.map((r,i)=>'<tr>'+r.map(x=>'<'+(i?'td':'th')+'>'+esc(x)+'</'+(i?'td':'th')+'>').join('')+'</tr>').join('')+'</table></body></html>';downloadBlob(html,'riwayat_item_iven.xls','application/vnd.ms-excel;charset=utf-8')}
+function exportCSV(){let rows=[['Invoice','Tanggal','Kasir','Customer','Nama Item Produk','Subtotal','Diskon','Total','Bayar','Kembalian'],...sales.map(s=>[s.invoice,s.date,s.cashier,s.customer,s.items.map(i=>{let p=PRODUCTS.find(p=>p.id===i.id);return p?`${p.name} (${i.qty})`:`Item #${i.id} (${i.qty})`}).join(', '),s.subtotal,s.discount,s.total,s.paid,s.change])];downloadBlob(rows.map(r=>r.map(x=>`"${String(x??'').replaceAll('"','""')}"`).join(',')).join('\\n'),'laporan_kasir_iven.csv','text/csv;charset=utf-8')}
+function backup(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({products:PRODUCTS,stock,sales},null,2)],{type:'application/json'}));a.download='backup_kasir_iven.json';a.click()}
+function clock(){document.getElementById('clock').textContent=new Date().toLocaleString('id-ID')}
+let today=new Date().toISOString().slice(0,10);document.getElementById('start').value=today;document.getElementById('end').value=today;document.getElementById('itemStart').value='';document.getElementById('itemEnd').value='';setInterval(clock,1000);clock();renderProducts();renderCart();renderItemHistory();
+</script></body></html>
